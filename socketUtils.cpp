@@ -10,6 +10,6 @@ void	setupIPV4Address(struct sockaddr_in * address, char * ip, int port) {
 	if (*ip)
 		inet_pton(AF_INET, ip, &address->sin_addr.s_addr);
 	else
-		address->sin_addr.s_addr = INADDR_ANY;
+		inet_pton(AF_INET, "127.0.0.1", &address->sin_addr.s_addr);
 	return ;
 }
