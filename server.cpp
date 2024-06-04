@@ -1,4 +1,5 @@
 #include "socketUtils.hpp"
+#include <sys/socket.h>
 
 int	main( void ) {
 	int						socketFD;
@@ -11,16 +12,14 @@ int	main( void ) {
 	socketFD = newSocket();
 	if (socketFD < 1)
 		return (-1);
-	std::cout << "Socket was sucessful" << std::endl;
 
 	setupIPV4Address(&server_address, "", 2000);
 	server_address_size = sizeof(server_address);
-	std::cout << "Address setup was sucessful" << std::endl;
 
 	connection = bind(socketFD, (struct sockaddr *)&server_address, sizeof(server_address));
 	if (connection != 0)
 		return (-2);
-	std::cout << "Binding was sucessful" << std::endl;
+	std::cout << "Listening" << std::endl;
 
 	connection = listen(socketFD, 10);
 
@@ -33,6 +32,9 @@ int	main( void ) {
 	char	buffer[1024];
 	recv(connection, buffer, sizeof(buffer), 0);
 	std::cout << "response: \n" << buffer << std::endl;
+	
+	shutdown(socketFD, SHUT_RDWR);
+	
 
 	return (0);
 }

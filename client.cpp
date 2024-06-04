@@ -5,7 +5,7 @@ int	main( void ) {
 	int						socketFD;
 	int						connection;
 
-	setupIPV4Address(&address, "142.250.188.46", 80);
+	setupIPV4Address(&address, "127.0.0.1", 2000);
 
 	socketFD = newSocket();
 	if (socketFD < 1)

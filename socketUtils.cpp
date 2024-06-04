@@ -5,7 +5,7 @@ int	newSocket( void ) {
 }
 
 void	setupIPV4Address(struct sockaddr_in * address, char * ip, int port) {
-	address->sin_port = htons(80);
+	address->sin_port = htons(port);
 	address->sin_family = AF_INET;
 	if (*ip)
 		inet_pton(AF_INET, ip, &address->sin_addr.s_addr);
